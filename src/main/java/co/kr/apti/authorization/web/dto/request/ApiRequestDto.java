@@ -15,7 +15,8 @@ public class ApiRequestDto {
         private String aptCode;
         private String dong;
         private String ho;
-        private String hp;
+        private String mobileNo;
+        private String name;
 
     }
 

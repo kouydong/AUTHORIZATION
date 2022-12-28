@@ -63,28 +63,33 @@ public class ApiController {
      * @param requestDto 요청 파라미터
      */
     @PostMapping("/apartments/users/authorization")
-    public ResponseEntity<?>  isAuthorization(@RequestBody ApiRequestDto.authorization requestDto) {
+    public ResponseEntity<?>  isAuthorization(@RequestBody ApiRequestDto.authorization requestDto) throws Exception {
 
         String aptCode  = requestDto.getAptCode();
         String dong     = StringUtil.padLeft(requestDto.getDong(), 4, '0');
         String ho       = StringUtil.padLeft(requestDto.getHo(), 4, '0');
-        String hp       = requestDto.getHp();
+        String mobileNo = requestDto.getMobileNo();
+        String name     = requestDto.getName();
+
         log.info("입주민 인증 파라미터 확인");
         log.info("aptCode {} ", aptCode);
         log.info("dong {} ", dong);
         log.info("ho {} ", ho);
-        log.info("hp {} ", hp);
+        log.info("mobileNo {} ", mobileNo);
+        log.info("name {} ", name);
 
-        // API 호출 및 결과값 리턴(예시)
-//        JsonObject bodyJson = new JsonObject();
-//        bodyJson.addProperty("BillYm", "202201");
-//        bodyJson.addProperty("FixCd", aptCode);
-//        bodyJson.addProperty("Dongho", dongHo);
-//
-//        JsonObject responseJson = ApiCall.postApiCall(baseUrl, "/api/manage/GetManageInfo", bodyJson);
-//
-//        Map<String, String> responseMap = new ObjectMapper().readValue(responseJson.toString(), Map.class);
 
-        return ResponseEntity.status(HttpStatus.OK).body("입주민인증결과값리턴");
+        JsonObject bodyJson = new JsonObject();
+        bodyJson.addProperty("aptCd"        , aptCode);
+        bodyJson.addProperty("dongHo"       , dong + ho);
+        bodyJson.addProperty("mobileTelNo"  , mobileNo);
+        bodyJson.addProperty("name"         , name);
+
+        JsonObject responseJson = ApiCall.postApiCall(baseUrl, "/api/v2/common/authorization", bodyJson);
+
+        Map<String, String> responseMap = new ObjectMapper().readValue(responseJson.toString(), Map.class);
+
+
+        return ResponseEntity.status(HttpStatus.OK).body(responseMap);
     }
 }
