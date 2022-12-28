@@ -1,0 +1,64 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '2.7.6'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+}
+
+group = 'co.kr.apti'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+
+	//	WebFlux dependency
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-webflux', version: '2.7.6'
+
+	//	JPA
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+	//	WEB
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	// Bean Validation assessment
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+	//	LOMBOK
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	// POSTGRES
+	runtimeOnly 'org.postgresql:postgresql'
+
+	// H2
+	runtimeOnly 'com.h2database:h2'
+
+	// GSON
+	implementation group: 'com.google.code.gson', name: 'gson', version: '2.10'
+
+	// JWT
+	implementation group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.5'
+	runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.5'
+	runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.5'
+
+	// Spring Security
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '3.0.0'
+
+	// J-UNIT TEST
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}

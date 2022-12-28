@@ -1,0 +1,9 @@
+<!-- 콘솔 로그 설정 START
+     appender name은 로깅 주체를 판단하기 위해 사용되며 콘솔 로그 설정이므로 ch.qos.logback.core.ConsoleAppender 클래스 사용
+-->
+<appender name="APTICONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+        <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS}[%highlight(%-5level)][%logger{15}] : %msg%n</pattern>
+    </encoder>
+</appender>
+<!-- 콘솔 로그 설정 END-->

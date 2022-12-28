@@ -1,0 +1,58 @@
+#──────────────────────────────────────────────────────────────────────
+# POSTGRES 환경 설정 (Setting for POSTGRES DB)
+#──────────────────────────────────────────────────────────────────────
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/kouydong
+    username: kouydong
+    password: 1234
+    drive-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10           # Max Connection size 10개
+      connection-timeout: 5000        # Connection Timeout 시간 5초
+      connection-init-sql: SELECT 1   # Connection 초기 SQL
+      validation-timeout: 2000        # 유효성 Timeout 시간 2초
+      minimum-idle: 10
+      idle-timeout: 600000
+      max-lifetime: 1800000
+
+#──────────────────────────────────────────────────────────────────────
+# JPA 환경 설정(CREATE, UPDATE, VALIDATE)
+#──────────────────────────────────────────────────────────────────────
+  jpa:
+    open-in-view: false
+    hibernate:
+      dialect: org.hibernate.dialect.ProgressDialect
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+
+#──────────────────────────────────────────────────────────────────────
+# 서버 포트 설정
+#──────────────────────────────────────────────────────────────────────
+server:
+  port: 9101
+
+#──────────────────────────────────────────────────────────────────────
+# API 호출 BASE URL 설정
+#──────────────────────────────────────────────────────────────────────
+api:
+  apt-i:
+    baseUrl: https://gcp.apti.co.kr
+
+#──────────────────────────────────────────────────────────────────────
+# 토큰 설정(변경 필요)
+#──────────────────────────────────────────────────────────────────────
+token:
+  jwt:
+    secret: "elwEyESsYt9V7zq57TejMnVUyAblYcf8Qye08f7Ku795XkHc"
+  access-token:
+    # 5분
+    #    seconds: 300
+    # 10년
+    seconds: 315360000
+  refresh-token:
+    # 10년
+    seconds: 315360000

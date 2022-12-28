@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: API-AUTHORIZATION-SERVER
+
+logging:
+  config:
+    classpath:config/logback-${spring.profiles.active}.xml
+#──────────────────────────────────────────────────────────────────────
+# Default Setting END
+#──────────────────────────────────────────────────────────────────────

@@ -1,0 +1,34 @@
+<!-- 파일 로그 설정 START
+    appender name은 로깅 주체를 판단하기 위해 사용되며 콘솔 로그 설정이므로 ch.qos.logback.core.rolling.RollingFileAppender 클래스 사용
+-->
+<appender name="APTIROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <!-- 로그파일 레벨 및 파일 형식 설정 START-->
+    <encoder>
+        <pattern>[%-5level] %d{HH:mm:ss.SSS} %logger{36} - %msg%n</pattern>
+    </encoder>
+    <!-- 로그파일 레벨 및 파일 형식 설정 END -->
+
+    <!-- 로그파일패스 및 이름 설정 -->
+    <file>${LOGS_FILENAME}</file>
+    <!-- 로그롤링파일설정 START
+    롤링파일이란? : 로컬 시간 기준 일자가 변경된 경우(오전 12시) 생성된 로그 파일을 설정된 형태로 보관하고 새로운 로그파일 생성-->
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+        <!--로그롤링파일패스 및 이름 설정
+            ${LOGS_PATH}/APU-Server-Main-%d{yyyy-MM-dd}.%i.log : 일반 형태의 파일 형태로 설정
+            ${LOGS_PATH}/logback.%d{yyyy-MM-dd}.%i.log.gz : 리눅스 형태의 압축 파일 형태로 설정
+            롤링파일 포맷 설정 START
+        -->
+        <fileNamePattern>${LOGS_ROLLFILENAMEPATTERN}</fileNamePattern>
+        <!-- 90일이 지난 파일은 삭제 처리 -->
+        <maxHistory>90</maxHistory>
+        <!-- ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP 클래스를 통해 파일 사이즈 및 롤링 파일 생성 시간 설정 -->
+        <timeBasedFileNamingAndTriggeringPolicy
+                class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+            <!-- 파일 사이즈 -->
+            <maxFileSize>500MB</maxFileSize>
+        </timeBasedFileNamingAndTriggeringPolicy>
+    </rollingPolicy>
+    <!-- 로그롤링파일설정 END -->
+</appender>
+<!-- 파일 로그 설정 END-->
+

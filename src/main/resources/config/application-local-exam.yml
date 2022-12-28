@@ -1,0 +1,53 @@
+#──────────────────────────────────────────────────────────────────────
+# Local Environment START
+#──────────────────────────────────────────────────────────────────────
+spring:
+  datasource:
+    url:  jdbc:h2:~/test
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+    initialization-mode: always
+    schema: classpath:h2/schema.sql
+    data: classpath:h2/data.sql
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+#──────────────────────────────────────────────────────────────────────
+# JPA 환경 설정(CREATE, UPDATE, VALIDATE)
+#──────────────────────────────────────────────────────────────────────
+  jpa:
+    open-in-view: false
+    hibernate:
+      dialect: org.hibernate.dialect.H2Dialect
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+#──────────────────────────────────────────────────────────────────────
+# 서버 포트 설정
+#──────────────────────────────────────────────────────────────────────
+server:
+  port: 9100
+#──────────────────────────────────────────────────────────────────────
+# API 호출 BASE URL 설정
+#──────────────────────────────────────────────────────────────────────
+api:
+  apt-i:
+    baseUrl: https://gcp.apti.co.kr
+#──────────────────────────────────────────────────────────────────────
+# 토큰 설정
+#──────────────────────────────────────────────────────────────────────
+token:
+  jwt:
+    secret: "elwEyVBsYt9V7zq57TejMnVUyAblYcf8Qye08f7MGVA5XkHc"
+  access-token:
+# 5분
+#    seconds: 300
+# 10년
+    seconds: 315360000
+  refresh-token:
+# 10년
+    seconds: 315360000
