@@ -57,6 +57,10 @@ dependencies {
 	// J-UNIT TEST
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
+	// Oracle
+	runtimeOnly 'com.oracle.database.jdbc:ojdbc8'
+	implementation group: 'com.oracle.ojdbc', name: 'orai18n', version: '19.3.0.0'
+
 }
 
 tasks.named('test') {

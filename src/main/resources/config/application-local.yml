@@ -2,26 +2,46 @@
 # Local Environment START
 #──────────────────────────────────────────────────────────────────────
 spring:
+#  datasource:
+#    url:  jdbc:h2:~/test
+#    driverClassName: org.h2.Driver
+#    username: sa
+#    password:
+#    initialization-mode: always
+#    schema: classpath:h2/schema.sql
+#    data: classpath:h2/data.sql
+#  h2:
+#    console:
+#      enabled: true
+#      path: /h2-console
   datasource:
-    url:  jdbc:h2:~/test
-    driverClassName: org.h2.Driver
-    username: sa
-    password:
-    initialization-mode: always
-    schema: classpath:h2/schema.sql
-    data: classpath:h2/data.sql
-  h2:
-    console:
-      enabled: true
-      path: /h2-console
+    url: jdbc:postgresql://localhost:5432/kouydong
+    username: kouydong
+    password: 1234
+    drive-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10           # Max Connection size 10개
+      connection-timeout: 5000        # Connection Timeout 시간 5초
+      connection-init-sql: SELECT 1   # Connection 초기 SQL
+      validation-timeout: 2000        # 유효성 Timeout 시간 2초
+      minimum-idle: 10
+      idle-timeout: 600000
+      max-lifetime: 1800000
+
+  # 오라클연결정보-관리비 EBPP
+  oracle-datasource-hjin:
+    driver-class-name: oracle.jdbc.OracleDriver
+    jdbc-url: jdbc:oracle:thin:@39.115.143.183:11522/thjin
+    username: ntai
+    password: wjdqhqhgh
 #──────────────────────────────────────────────────────────────────────
 # JPA 환경 설정(CREATE, UPDATE, VALIDATE)
 #──────────────────────────────────────────────────────────────────────
   jpa:
     open-in-view: false
     hibernate:
-      dialect: org.hibernate.dialect.H2Dialect
-      ddl-auto: create
+      dialect: org.hibernate.dialect.ProgressDialect
+      ddl-auto: update
     properties:
       hibernate:
         format_sql: true
