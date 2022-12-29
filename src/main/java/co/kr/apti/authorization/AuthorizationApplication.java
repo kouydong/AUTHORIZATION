@@ -59,13 +59,13 @@ public class AuthorizationApplication {
 	@PostConstruct
 	public void initData() {
 
-		makeUser("ADMIN", "1234", Arrays.asList("ADMIN"));
-		makeUser("MANAGER", "1234", Arrays.asList("MANGER"));
-		makeUser("USER", "1234", Arrays.asList("USER"));
+		makeUser("ADMIN", "1234", "ROLE_ADMIN");
+		makeUser("MANAGER", "1234", "ROLE_MANGER");
+		makeUser("USER", "1234", "ROLE_USER");
 
 	}
 	// 초기 관리자 토큰 생성
-	public void makeUser(String memberId, String password, List<String> roles) {
+	public void makeUser(String memberId, String password, String roles) {
 
 
 		String encryptedPassword = PasswordEncoderFactories.createDelegatingPasswordEncoder().encode(password);
@@ -122,7 +122,7 @@ public class AuthorizationApplication {
 								.password(encryptedPassword)
 								.refreshToken(refreshToken)
 								.encryptedKey(encryptedKey)
-								.roles(roles)
+								.roles(Arrays.asList(roles))
 								.build()
 				);
 		log.info("{} accessToken {}", roles, accessToken);
