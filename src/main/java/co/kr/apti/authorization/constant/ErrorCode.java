@@ -30,6 +30,10 @@ public enum ErrorCode {
 
     INSERT_FAIL_EXCEPTION(20713, "맴버(클라이언트) 등록 실패"),
 
+    ENTITY_DUPLICATED_EXCEPTION(20714, "맴버(클라이언트) 존재"),
+
+
+
 
     // 상기 사항 까지 사용 확인
 

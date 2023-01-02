@@ -194,6 +194,30 @@ public class AuthorizationExceptionHandler extends ResponseEntityExceptionHandle
         return ResponseEntity.status(exception.getHttpStatus()).headers(headers).body(new GsonBuilder().setPrettyPrinting().create().toJson(responseDto));
     }
 
+    /**
+     * @author Kouydong
+     * @apiNote 엔티티 중복이 발생한 경우
+     * @param exception 사용자 정의타입 파라미터 객체
+     * @return ResponseEntity
+     */
+    @ExceptionHandler(EntityDuplicatedException.class)
+    public ResponseEntity<?> exceptionHandler(EntityDuplicatedException exception) {
+
+        log.error("EntityDuplicatedException 예외 발생 : " + exception.getMessage());
+
+        ExceptionResponseDto responseDto = new ExceptionResponseDto();
+
+        responseDto.setResultCode(exception.getCode());
+        responseDto.setMessage(exception.getCodeName());
+        responseDto.setHttpStatus(exception.getHttpStatus());
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add(HttpHeaders.CONTENT_TYPE, "application/json;charset=UTF-8");
+
+        return ResponseEntity.status(exception.getHttpStatus()).headers(headers).body(new GsonBuilder().setPrettyPrinting().create().toJson(responseDto));
+    }
+
+
 
     /**
      * 토큰 예외처리를 진행
@@ -217,6 +241,8 @@ public class AuthorizationExceptionHandler extends ResponseEntityExceptionHandle
 
         return ResponseEntity.status(exception.getHttpStatus()).headers(headers).body(new GsonBuilder().setPrettyPrinting().create().toJson(responseDto));
     }
+
+
 
 
     /**

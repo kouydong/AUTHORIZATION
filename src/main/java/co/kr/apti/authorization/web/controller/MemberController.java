@@ -1,6 +1,8 @@
 package co.kr.apti.authorization.web.controller;
 
 import ch.qos.logback.classic.Logger;
+import co.kr.apti.authorization.domain.entity.Member;
+import co.kr.apti.authorization.exception.EntityDuplicatedException;
 import co.kr.apti.authorization.exception.ParameterNotValidException;
 import co.kr.apti.authorization.service.MemberService;
 import co.kr.apti.authorization.web.dto.request.MemberRequestDto;
@@ -18,6 +20,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
+import static co.kr.apti.authorization.constant.ErrorCode.ENTITY_DUPLICATED_EXCEPTION;
 import static co.kr.apti.authorization.constant.ErrorCode.PARAMETER_NOT_VALID_EXCEPTION;
 
 
@@ -29,6 +34,9 @@ public class MemberController {
     private final Logger log = (Logger) LoggerFactory.getLogger(MemberController.class);
 
     private final MemberService memberService;
+
+
+
 
     /**
      * 사용자 정보를 등록.
@@ -45,14 +53,32 @@ public class MemberController {
         log.info("requestDto {}", requestDto);
 
         String memberId = requestDto.getMemberId();
-
         // 패스워드를 만들기 위해 스프링 시큐리티에서 제공하는 대표 인코딩 방식 사용
         String encryptedPassword = PasswordEncoderFactories.createDelegatingPasswordEncoder().encode(requestDto.getPassword());
 
         // AES 암호화 키(40 bytes)
         String encryptedKey = encryptedPassword.substring(encryptedPassword.length() - 40);
 
-        memberService.joinMember(memberId, encryptedPassword, encryptedKey);
+        // 맴버존재유무확인
+        Optional<Member> member = memberService.findByMember(memberId);
+
+        log.info("해당 값은 ==>" + member.isEmpty());
+        // 맴버가 없다면 신규 맴버 등록
+        if(member.isEmpty()) {
+            Member newMember = memberService.joinMember(memberId, encryptedPassword, encryptedKey);
+        // 맴버가 존재한다면 해당 정보 출력
+        } else {
+            encryptedPassword = member.get().getPassword();
+            encryptedKey = member.get().getEncryptedKey();
+        }
+
+
+
+
+
+
+
+
 
         return ResponseEntity.status(HttpStatus.CREATED).body(
                 MemberJoinResponseDto

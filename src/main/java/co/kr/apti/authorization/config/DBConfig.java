@@ -16,6 +16,14 @@ import javax.sql.DataSource;
 @EnableTransactionManagement
 public class DBConfig {
 
+    @Primary
+    @Bean(name = "postgres")
+    @ConfigurationProperties(prefix = "spring.datasource")
+    public DataSource postgresDataSource() {
+
+        return DataSourceBuilder.create().type(HikariDataSource.class).build();
+
+    }
 //    @Primary
     @Bean(name = "oracle")
     @ConfigurationProperties(prefix = "spring.oracle-datasource-hjin")

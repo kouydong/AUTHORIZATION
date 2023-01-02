@@ -41,7 +41,7 @@ dependencies {
 	runtimeOnly 'org.postgresql:postgresql'
 
 	// H2
-	runtimeOnly 'com.h2database:h2'
+//	runtimeOnly 'com.h2database:h2'
 
 	// GSON
 	implementation group: 'com.google.code.gson', name: 'gson', version: '2.10'

@@ -4,10 +4,7 @@ import ch.qos.logback.classic.Logger;
 import co.kr.apti.authorization.config.TokenProvider;
 import co.kr.apti.authorization.domain.entity.Member;
 import co.kr.apti.authorization.domain.repository.MemberRepository;
-import co.kr.apti.authorization.exception.ClientDeleteException;
-import co.kr.apti.authorization.exception.CredentialsInvalidException;
-import co.kr.apti.authorization.exception.EntityNotFoundException;
-import co.kr.apti.authorization.exception.TokenException;
+import co.kr.apti.authorization.exception.*;
 import co.kr.apti.authorization.web.dto.response.TokenResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.LoggerFactory;
@@ -33,6 +30,18 @@ public class MemberService {
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private final TokenProvider jwtTokenProvider;
 
+
+    /**
+     * 사용자 존재 유무를 조회해서 있는 경우 예외를 발생 시킴
+     * 작성자 : 고의동
+     * @param memberId 사용자ID
+     */
+    public Optional<Member> findByMember(String memberId) {
+
+        return memberRepository.findByMemberId(memberId);
+
+    }
+
     /**
      * 사용자 정보를 등록한다.
      * 해당 프로세스는 아파트 아이에서 처리한다.
@@ -41,14 +50,14 @@ public class MemberService {
      * @param encryptedPassword 암호화된패스워드
      */
     @Transactional
-    public void joinMember(String memberId, String encryptedPassword, String encryptedKey) {
+    public Member joinMember(String memberId, String encryptedPassword, String encryptedKey) {
         //─────────────────────────────────────────────────────────────────────────────────────────────────────────
         //  일반적으로 ADMIN, USER 등으로 구분하나 역할의 경우 Customizing 가능
         //─────────────────────────────────────────────────────────────────────────────────────────────────────────
         List<String> roles = new ArrayList<>();
         roles.add("USER");
 
-        memberRepository
+        return memberRepository
                 .save(
                     Member.builder()
                             .memberId(memberId)
