@@ -61,7 +61,7 @@ public class AuthorizationApplication {
 
 		makeUser("ADMIN", "1234", "ROLE_ADMIN");
 		makeUser("MANAGER", "1234", "ROLE_MANGER");
-		makeUser("USER", "1234", "ROLE_USER");
+//		makeUser("USER", "1234", "ROLE_USER");
 
 	}
 	// 초기 관리자 토큰 생성

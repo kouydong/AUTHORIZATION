@@ -36,7 +36,8 @@ public class Member implements UserDetails {
     private String encryptedKey;
 
     // Fetch 전략은 EAGER 설정
-    @ElementCollection(fetch = FetchType.EAGER)
+    @ElementCollection(fetch = FetchType.LAZY)
+//    @ElementCollection(fetch = FetchType.EAGER)
     @Builder.Default
     private List<String> roles = new ArrayList<>();
 

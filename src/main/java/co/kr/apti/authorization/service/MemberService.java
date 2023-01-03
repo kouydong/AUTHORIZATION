@@ -74,14 +74,13 @@ public class MemberService {
      * 사용자 정보를 등록한다.
      * 해당 프로세스는 아파트 아이에서 처리한다.
      * 작성자 : 고의동
-     * @param member 맴버(클라이언트) 객체
      */
     @Transactional
     public void deleteMember(String memberId, String password) {
 
         // 데이터가 없으면 예외 처리
         Optional<Member> member = memberRepository.findByMemberIdAndPassword(memberId, password);
-        member.orElseThrow(() -> new ClientDeleteException(CLIENT_DELETE_EXCEPTION.getCode(), CLIENT_DELETE_EXCEPTION.getCodeName(), HttpStatus.INTERNAL_SERVER_ERROR));
+        member.orElseThrow(() -> new ClientDeleteException(ENTITY_NOT_FOUND_EXCEPTION.getCode(), ENTITY_NOT_FOUND_EXCEPTION.getCodeName(), HttpStatus.INTERNAL_SERVER_ERROR));
 
         // 삭제 처리
         memberRepository.delete(member.get());
@@ -101,20 +100,15 @@ public class MemberService {
         // 아래의 UsernamePasswordAuthenticationToken 생성자는 isAuthenticated()가 false 이기 때문에 토큰을 생성함에 있어 어떤 코드도 안정적임.
         // isAuthenticated() false 란 의미는 아직 인증되지 않았고 인증을 위한 객체를 생성함. AuthenticationManager 를 통해 인증 절차를 처리
 
+        // 맴버 아이디와 맴버 롤의 조회
         UsernamePasswordAuthenticationToken authenticationMember = new UsernamePasswordAuthenticationToken(memberId, password);
 
-        Authentication authentication = null;
+        // 인증 정보를 가지고 옴
+        Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationMember);
 
-        // 인증되지 않은 authenticationMember 객체에 인증 절차 진행
-        // 자격 증명에 실패했을 경우 예외 처리
-        try {
-            authentication = authenticationManagerBuilder.getObject().authenticate(authenticationMember);
-
-        } catch(Exception e) {
-
-            throw new CredentialsInvalidException(CREDENTIALS_INVALID_EXCEPTION.getCode(), CREDENTIALS_INVALID_EXCEPTION.getCodeName(), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-
+        // 인증 되어 있지 않았다면 예외 발생
+        if(!authentication.isAuthenticated()) throw new CredentialsInvalidException(CREDENTIALS_INVALID_EXCEPTION.getCode(), CREDENTIALS_INVALID_EXCEPTION.getCodeName(), HttpStatus.INTERNAL_SERVER_ERROR);
+        if(authentication.getAuthorities().isEmpty()) throw new CredentialsInvalidException(ROLE_EMPTY_EXCEPTION.getCode(), ROLE_EMPTY_EXCEPTION.getCodeName(), HttpStatus.INTERNAL_SERVER_ERROR);
 
         // 인증 정보를 기반으로 JWT 토큰 생성
         TokenResponseDto tokenResponseDto = jwtTokenProvider.generateToken(authentication);

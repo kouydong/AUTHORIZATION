@@ -90,7 +90,6 @@ public class MemberController {
                 );
     }
 
-
     /**
      * 사용자 정보를 삭제.
      * 해당 프로세스는 아파트 아이에서 처리한다.

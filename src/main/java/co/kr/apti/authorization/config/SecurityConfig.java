@@ -69,7 +69,7 @@ public class SecurityConfig {
                 //  모든 권한들이 엑세스 토큰을 발급 받을 수 있도록 /members/tokens/** 접근 가능
                 //────────────────────────────────────────────────────────────────────────────────────────────────────
                 .authorizeRequests()// 인증 요청이 들어오면
-                .antMatchers("/members/tokens/**","/h2-console/**").permitAll() // 모두 접근 허용
+                .antMatchers("/h2-console/**").permitAll() // 모두 접근 허용(H2 디비 미사용시 제거 필요)
                 .antMatchers("/members/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_MANAGER" ) // MANAGE
                 .antMatchers("/api/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_MANAGER", "ROLE_USER")
                 .anyRequest().authenticated()

@@ -23,16 +23,15 @@ public enum ErrorCode {
     API_CALL_EXCEPTION(9   , "API 호출 실패"),
 
     API_ENTITY_NOT_FOUND_EXCEPTION(10, "API 호출 결과 없음"),
-    CREDENTIALS_INVALID_EXCEPTION(20707, "자격증명 실패"),
+    CREDENTIALS_INVALID_EXCEPTION(20707, "자격증명 실패(사용자 정보 없음)"),
+
     CLIENT_DELETE_EXCEPTION(20708, "맴버(클라이언트) 삭제 실패"),
     ENTITY_NOT_FOUND_EXCEPTION(20710, "클라이언트 미존재"),
     RESOURCE_NOT_ALLOW_EXCEPTION(20711, "Resource 접근 권한 없음"),
 
     INSERT_FAIL_EXCEPTION(20713, "맴버(클라이언트) 등록 실패"),
-
     ENTITY_DUPLICATED_EXCEPTION(20714, "맴버(클라이언트) 존재"),
-
-
+    ROLE_EMPTY_EXCEPTION(20715, "자격증명 실패(역할 정보 없음)"),
 
 
     // 상기 사항 까지 사용 확인
