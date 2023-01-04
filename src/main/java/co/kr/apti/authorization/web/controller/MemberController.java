@@ -2,7 +2,6 @@ package co.kr.apti.authorization.web.controller;
 
 import ch.qos.logback.classic.Logger;
 import co.kr.apti.authorization.domain.entity.Member;
-import co.kr.apti.authorization.exception.EntityDuplicatedException;
 import co.kr.apti.authorization.exception.ParameterNotValidException;
 import co.kr.apti.authorization.service.MemberService;
 import co.kr.apti.authorization.web.dto.request.MemberRequestDto;
@@ -22,7 +21,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
-import static co.kr.apti.authorization.constant.ErrorCode.ENTITY_DUPLICATED_EXCEPTION;
 import static co.kr.apti.authorization.constant.ErrorCode.PARAMETER_NOT_VALID_EXCEPTION;
 
 
@@ -34,9 +32,6 @@ public class MemberController {
     private final Logger log = (Logger) LoggerFactory.getLogger(MemberController.class);
 
     private final MemberService memberService;
-
-
-
 
     /**
      * 사용자 정보를 등록.
