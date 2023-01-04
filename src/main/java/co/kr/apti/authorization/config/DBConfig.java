@@ -24,7 +24,7 @@ public class DBConfig {
         return DataSourceBuilder.create().type(HikariDataSource.class).build();
 
     }
-//    @Primary
+
     @Bean(name = "oracle")
     @ConfigurationProperties(prefix = "spring.oracle-datasource-hjin")
     public DataSource oracleDataSource() {

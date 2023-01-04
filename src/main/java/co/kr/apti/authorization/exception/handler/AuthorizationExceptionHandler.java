@@ -33,7 +33,7 @@ public class AuthorizationExceptionHandler extends ResponseEntityExceptionHandle
     @ExceptionHandler(ParameterNotValidException.class)
     public ResponseEntity<?> exceptionHandler(ParameterNotValidException parameterNotValidException) {
 
-        log.error("ParameterNotValidException 예외 발생 : " + parameterNotValidException.getCodeName());
+        log.warn("ParameterNotValidException 예외 발생 : " + parameterNotValidException.getCodeName());
 
         ExceptionResponseDto responseDto = new ExceptionResponseDto();
 
@@ -59,7 +59,7 @@ public class AuthorizationExceptionHandler extends ResponseEntityExceptionHandle
     @ExceptionHandler(ApiCallException.class)
     public ResponseEntity<?> exceptionHandler(ApiCallException apiCallException) {
 
-        log.error("ApiCallException 예외 발생 : " + apiCallException.getCodeName());
+        log.warn("ApiCallException 예외 발생 : " + apiCallException.getCodeName());
 
         ExceptionResponseDto responseDto = new ExceptionResponseDto();
 
@@ -83,7 +83,7 @@ public class AuthorizationExceptionHandler extends ResponseEntityExceptionHandle
     @ExceptionHandler(CredentialsInvalidException.class)
     public ResponseEntity<?> exceptionHandler(CredentialsInvalidException exception) {
 
-        log.error("CredentialsFailException 예외 발생 : " + exception.getMessage());
+        log.warn("CredentialsFailException 예외 발생 : " + exception.getMessage());
 
         ExceptionResponseDto responseDto = new ExceptionResponseDto();
 
@@ -108,7 +108,7 @@ public class AuthorizationExceptionHandler extends ResponseEntityExceptionHandle
     @ExceptionHandler(EncryptionException.class)
     public ResponseEntity<?> exceptionHandler(EncryptionException exception) {
 
-        log.error("EncryptionException 예외 발생 : " + exception.getMessage());
+        log.warn("EncryptionException 예외 발생 : " + exception.getMessage());
 
         ExceptionResponseDto responseDto = new ExceptionResponseDto();
 
@@ -132,7 +132,7 @@ public class AuthorizationExceptionHandler extends ResponseEntityExceptionHandle
     @ExceptionHandler(ClientDeleteException.class)
     public ResponseEntity<?> exceptionHandler(ClientDeleteException exception) {
 
-        log.error("ClientDeleteException 예외 발생 : " + exception.getMessage());
+        log.warn("ClientDeleteException 예외 발생 : " + exception.getMessage());
 
         ExceptionResponseDto responseDto = new ExceptionResponseDto();
 
@@ -156,7 +156,7 @@ public class AuthorizationExceptionHandler extends ResponseEntityExceptionHandle
     @ExceptionHandler(DecryptionException.class)
     public ResponseEntity<?> exceptionHandler(DecryptionException exception) {
 
-        log.error("DecryptionException 예외 발생 : " + exception.getMessage());
+        log.warn("DecryptionException 예외 발생 : " + exception.getMessage());
 
         ExceptionResponseDto responseDto = new ExceptionResponseDto();
 
@@ -180,7 +180,7 @@ public class AuthorizationExceptionHandler extends ResponseEntityExceptionHandle
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<?> exceptionHandler(EntityNotFoundException exception) {
 
-        log.error("EntityNotFoundException 예외 발생 : " + exception.getMessage());
+        log.warn("EntityNotFoundException 예외 발생 : " + exception.getMessage());
 
         ExceptionResponseDto responseDto = new ExceptionResponseDto();
 
@@ -203,7 +203,7 @@ public class AuthorizationExceptionHandler extends ResponseEntityExceptionHandle
     @ExceptionHandler(EntityDuplicatedException.class)
     public ResponseEntity<?> exceptionHandler(EntityDuplicatedException exception) {
 
-        log.error("EntityDuplicatedException 예외 발생 : " + exception.getMessage());
+        log.warn("EntityDuplicatedException 예외 발생 : " + exception.getMessage());
 
         ExceptionResponseDto responseDto = new ExceptionResponseDto();
 
@@ -228,7 +228,7 @@ public class AuthorizationExceptionHandler extends ResponseEntityExceptionHandle
     @ExceptionHandler(TokenException.class)
     public ResponseEntity<?> exceptionHandler(TokenException exception) {
 
-        log.error("TokenException 예외 발생 : " + exception.getMessage());
+        log.warn("TokenException 예외 발생 : " + exception.getMessage());
 
         ExceptionResponseDto responseDto = new ExceptionResponseDto();
 

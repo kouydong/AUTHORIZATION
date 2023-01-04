@@ -62,7 +62,6 @@ public class MemberController {
         // 맴버존재유무확인
         Optional<Member> member = memberService.findByMember(memberId);
 
-        log.info("해당 값은 ==>" + member.isEmpty());
         // 맴버가 없다면 신규 맴버 등록
         if(member.isEmpty()) {
             Member newMember = memberService.joinMember(memberId, encryptedPassword, encryptedKey);
@@ -71,14 +70,6 @@ public class MemberController {
             encryptedPassword = member.get().getPassword();
             encryptedKey = member.get().getEncryptedKey();
         }
-
-
-
-
-
-
-
-
 
         return ResponseEntity.status(HttpStatus.CREATED).body(
                 MemberJoinResponseDto
