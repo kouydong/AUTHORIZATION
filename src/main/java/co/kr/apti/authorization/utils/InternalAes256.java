@@ -19,7 +19,7 @@ import static co.kr.apti.authorization.constant.ErrorCode.ENCRYPTION_EXCEPTION;
 public class InternalAes256 {
     public static String alg = "AES/CBC/PKCS5Padding";
     private static final String key = "U!8cQv+63Q*Yry$6F#%2+!1)!E37In%^";
-    private static final String iv  = "abcdef1234567890"; // 16byte
+    private static final String iv  = "abcdefghijklmnop"; // 16byte
 
 
     /**

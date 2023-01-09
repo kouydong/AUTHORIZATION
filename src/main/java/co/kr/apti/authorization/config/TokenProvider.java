@@ -86,8 +86,8 @@ public class TokenProvider {
                 // Header 설정
                 .setHeaderParam("typ", "jwt")
                 // PayLoad 설정
-                .setIssuer("API-I") // 토큰발행자(iss)
-                .setSubject("APT-I Access Token")   // 클레임제목
+                .setIssuer("Test") // 토큰발행자(iss)
+                .setSubject("Test Access Token")   // 클레임제목
                 .claim("role", authorities)   // 역할(권한)
                 .setId(authentication.getName())    // 아이디(jti)
                 .setAudience(authentication.getName()) // 고객
@@ -108,8 +108,8 @@ public class TokenProvider {
                 // Header 설정
                 .setHeaderParam("typ", "jwt")
                 // PayLoad 설정
-                .setIssuer("API-I") // 토큰발행자(iss)
-                .setSubject("APT-I Refresh Token")   // 클레임제목
+                .setIssuer("Test") // 토큰발행자(iss)
+                .setSubject("Test Refresh Token")   // 클레임제목
                 .setId(authentication.getName())    // 아이디(jti)
                 .setAudience(authentication.getName()) // 고객
                 .setIssuedAt(new Date(now)) // 토큰발행시간(iat)
