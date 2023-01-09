@@ -76,6 +76,7 @@ public class MemberController {
                 );
     }
 
+
     /**
      * 사용자 정보를 삭제.
      * 해당 프로세스는 아파트 아이에서 처리한다.
@@ -96,6 +97,7 @@ public class MemberController {
 
         return ResponseEntity.noContent().build();
     }
+
 
     /**
      * 사용자 ID와 암호화된 패스워드를 통해서 Access 및 Refresh Token 생성 및 데이터 베이스 저장
